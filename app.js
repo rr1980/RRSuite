@@ -5,10 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var global = require('./global.js');
-
+ 
 var index = require('./routes/index');
 var get = require('./routes/get');
-
+var i=0;
 var app = express();
 
 // view engine setup
