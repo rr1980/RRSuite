@@ -2,6 +2,28 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch nodemon",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/nodemon/bin/nodemon.js",
+            "stopOnEntry": false,
+            "args": [
+                "${workspaceRoot}/bin/www"
+            ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "externalConsole": false,
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
             "name": "Starten",
             "type": "node",
             "request": "launch",
