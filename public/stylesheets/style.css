@@ -1,0 +1,14 @@
+﻿html {
+    margin: 0;
+    padding: 0;
+} 
+
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/Space-Backgrounds4.jpg');
+}
+
+
