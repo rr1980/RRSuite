@@ -8,24 +8,7 @@ var bundler = global.bundler;
 /* GET home page. */
 router.get('/*', function(req, res, next) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var t=12;
 
   res.render('_layout', {
                 // content: "index.ejs",
