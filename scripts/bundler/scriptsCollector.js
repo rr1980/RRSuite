@@ -1,4 +1,4 @@
-﻿var path = require('path'), fs = require('fs');
+﻿var fs = require('fs');
 var global = require('../../global');
 var config = global.config;
 var self = this;
@@ -21,23 +21,23 @@ exports.collect = function () {
     var exec = config.bundler.scripts.exception;
 
     for (var e in exec) {
-        for (var r in result) {
-            var indexe = result[r].indexOf(exec[e]);
+        for (var u in result) {
+            var indexe = result[u].indexOf(exec[e]);
             if (indexe >= 0) {
-                result.splice(r, 1);
+                result.splice(u, 1);
             }
         }
     }
     return result;
-}
+};
 
 self.reverseArr = function (input) {
-    var ret = new Array;
+    var ret = new Array([]);
     for (var i = input.length - 1; i >= 0; i--) {
         ret.push(input[i]);
     }
     return ret;
-}
+};
 
 self._fromDir = function (dir, filter) {
     'use strict';
@@ -47,22 +47,22 @@ self._fromDir = function (dir, filter) {
         f.push(col[i].substring(8));
     }
     return f;
-}
+};
 
 
 self.__fromDir = function (dir, filter, fileList) {
     fileList = fileList || [];
     var files = fs.readdirSync(dir);
     for (var i in files) {
-        if (!files.hasOwnProperty(i)) continue;
+        if (!files.hasOwnProperty(i))
+        { continue; }
         var name = dir + '/' + files[i];
         if (fs.statSync(name).isDirectory()) {
             self.__fromDir(name, filter, fileList);
         } else if (name.indexOf(filter) >= 0) {
-            //var ttt = name.indexOf(config.bundler.scripts.exception);
             fileList.push(name);
         }
     }
     return fileList;
-}
+};
 

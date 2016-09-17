@@ -2,40 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "RRStart_Debug",
-            "type": "node",
-            "request": "attach",
-            "port": 12345,
-            "address": "localhost",
-            "restart": false,
-            "sourceMaps": false,
-            "outDir": null,
-            "localRoot": "${workspaceRoot}",
-            "remoteRoot": null
-        },
-        {
-            "name": "Launch nodemon",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceRoot}/node_modules/nodemon/bin/nodemon.js",
-            "stopOnEntry": false,
-            "args": [
-                "${workspaceRoot}/bin/www"
-            ],
-            "cwd": "${workspaceRoot}",
-            "preLaunchTask": null,
-            "runtimeExecutable": null,
-            "runtimeArgs": [
-                "--nolazy"
-            ],
-            "env": {
-                "NODE_ENV": "development"
-            },
-            "console": "internalConsole",
-            "sourceMaps": false,
-            "outDir": null
-        },
-        {
             "name": "Starten",
             "type": "node",
             "request": "launch",
