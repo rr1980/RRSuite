@@ -2,7 +2,7 @@
 logs
 *.log
 npm-debug.log*
-config.json
+
 # Runtime data
 pids
 *.pid
@@ -255,4 +255,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-*.json
+config.json
