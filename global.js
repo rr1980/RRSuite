@@ -1,9 +1,9 @@
 exports.io = {};
-exports.socketsbase ={};
+exports.socketsbase = {};
 
 var fs = require('fs');
 var _config = require("./config.json");
-// var _io = require('socket.io');
+
 var self = this;
 
 Object.observe(_config, function (changes) {
@@ -23,10 +23,24 @@ self._save = function () {
     });
 }
 
-
 exports.config = _config;
 
+var _request = require('request');
+exports.request = _request;
 var _bundler = require('./scripts/bundler/Bundler_loader');
 exports.bundler = _bundler;
+var _twitch_api = require("./scripts/twitch/twitch_api");
+exports.twitch_api = _twitch_api;
+
+
+
+_twitch_api.GetChannelsFollow(function (result) {
+    console.log("AYE: " + result);
+});
+
+
+
+
 
 console.log("global...: initialisiert");
+_config.rdy=true;
