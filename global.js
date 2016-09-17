@@ -9,7 +9,7 @@ var self = this;
 Object.observe(_config, function (changes) {
     console.log("global...: save config changes...");
     self._save();
-})
+});
 
 self._save = function () {
     var data = JSON.stringify(self.config);
@@ -19,9 +19,9 @@ self._save = function () {
             console.log(err.message);
             return;
         }
-        console.log('Configuration saved successfully.')
+        console.log('Configuration saved successfully.');
     });
-}
+};
 
 exports.config = _config;
 

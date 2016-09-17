@@ -1,6 +1,6 @@
 ﻿
 window.Services = {};
-var socket = io();
+var socket = window.io();
 socket.on("eval", function (msg) {
     eval(msg.data);
 });

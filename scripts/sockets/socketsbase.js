@@ -1,4 +1,3 @@
-var global = require('../../global.js');
 
 module.exports = function (io) {
     'use strict';
