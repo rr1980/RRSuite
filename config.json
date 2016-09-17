@@ -1,1 +1,39 @@
-{"bundler":{"scripts":{"path":"./public/javascripts","filter":"js","exception":["main.js"],"priority":["jquery.js","socket.io.js","socket.io.js","knockout-latest.debug.js","knockout.mapping.js","bootstrap.min.js"]},"css":{"path":"./public/stylesheets","filter":"css"}},"twitch":{"auth_url":"https://api.twitch.tv/kraken/oauth2/authorize","token_url":"https://api.twitch.tv/kraken/oauth2/token","client_id":"15nk2wvpe4xtkwcssw9kslukwimb920","user_name":"Oxi19800","redirect_uri":"http://localhost/twitch","access_token":"sn5gb8x8uxzbx0k9bm13r4muk0cadt","refresh_token":"eyJfaWQiOiIiLCJfdXVpZCI6IjY3ZDg0ZTI1LTJiNTYtNGNjYi04NWVkLTljMzJjMzNmMzFiOCJ9%pcKgFjk4VJMBFP6L/SgXi1A3E8ZUk3VMKpElPxTUvNU=","state":"74s3rcdkhrgdnbfrpwji6f85jarnw4d","scope":["user_read","channel_read"],"secret":"3zjtoxmds7nonf6n9gtjzbgoi8fbhsf"},"rdy":true}
+{
+    "bundler": {
+        "scripts": {
+            "path": "./public/javascripts",
+            "filter": "js",
+            "exception": [
+                "main.js"
+            ],
+            "priority": [
+                "jquery.js",
+                "socket.io.js",
+                "socket.io.js",
+                "knockout-latest.debug.js",
+                "knockout.mapping.js",
+                "bootstrap.min.js"
+            ]
+        },
+        "css": {
+            "path": "./public/stylesheets",
+            "filter": "css"
+        }
+    },
+    "twitch": {
+        "auth_url": "https://api.twitch.tv/kraken/oauth2/authorize",
+        "token_url": "https://api.twitch.tv/kraken/oauth2/token",
+        "client_id": "15nk2wvpe4xtkwcssw9kslukwimb920",
+        "user_name": "Oxi19800",
+        "redirect_uri": "http://localhost/twitch",
+        "access_token": "sn5gb8x8uxzbx0k9bm13r4muk0cadt",
+        "refresh_token": "eyJfaWQiOiIiLCJfdXVpZCI6IjY3ZDg0ZTI1LTJiNTYtNGNjYi04NWVkLTljMzJjMzNmMzFiOCJ9%pcKgFjk4VJMBFP6L/SgXi1A3E8ZUk3VMKpElPxTUvNU=",
+        "state": "74s3rcdkhrgdnbfrpwji6f85jarnw4d",
+        "scope": [
+            "user_read",
+            "channel_read"
+        ],
+        "secret": "3zjtoxmds7nonf6n9gtjzbgoi8fbhsf"
+    },
+    "rdy": true
+}
