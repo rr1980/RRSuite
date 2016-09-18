@@ -23,13 +23,8 @@ g.router.get('/', function (req, res, next) {
 
 g.router.get('/twitch*', function (req, res, next) {
     if (req.query.code !== null) {
-        console.log('twitch...: AUTH');
-        g.twitch_api.GetToken(req.query.code, res, function (res) {
-            g.twitch_api.GetChannelsFollowAsync(function (data) {
-                g.twitch_api.follows = data;
-                res.redirect("/");
-            });
-        });
+        g.twitch_api.Init(req.query.code);
+        res.redirect("/");
     }
     else {
         console.log('NOPE!!! /index.js /twitch no code in query');
