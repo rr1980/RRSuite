@@ -1,12 +1,24 @@
 var g = require('../../global.js');
 
 
+exports.GetChannelsFollow = function () {
+    var uri = "https://api.twitch.tv/kraken/streams/followed" +
+        "?client_id=" + g.config.twitch.client_id +
+        "&oauth_token=" + g.config.twitch.access_token;
+    var result = g.request_Sync("GET", uri);
+    var f = JSON.parse(result.body.toString('utf-8'));
+    return f.streams;
+};
+
 exports.GetChannelsFollowAsync = function (callback) {
-    var uri = "https://api.twitch.tv/kraken/users/Oxi19800/follows/channels?client_id=" + g.config.twitch.client_id;
+    var uri = "https://api.twitch.tv/kraken/streams/followed" +
+        "?client_id=" + g.config.twitch.client_id +
+        "&oauth_token=" + g.config.twitch.access_token;
     g.request(uri,
         function (error, response, body) {
             if (!error && response.statusCode === 200) {
-                callback(JSON.parse(body));
+                var r = JSON.parse(body);
+                callback(r.streams);
             }
             else {
                 console.log("ERROR............: " + JSON.stringify(error));
@@ -42,14 +54,6 @@ exports.AuthUrl = function () {
         "&redirect_uri=" + g.config.twitch.redirect_uri +
         "&scope=" + g.config.twitch.scope[0] +
         "&state=" + g.config.twitch.state;
-}
-
-exports.GetChannelsFollow = function () {
-    var uri = "https://api.twitch.tv/kraken/streams/followed"+
-    "?client_id="+g.config.twitch.client_id+
-    "&oauth_token="+g.config.twitch.access_token;
-    var result = g.request_Sync("GET", uri);
-    var f = JSON.parse(result.body.toString('utf-8'));
-    return f.streams;
 };
+
 

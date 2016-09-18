@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
+var g = require('../global');
 
 /* GET users listing. */
-router.get('/get', function(req, res, next) {
-  res.send('respond with a resource');
+g.router.get('/getFollows', function (req, res, next) {
+    res.json(g.config.twitch.follows);
 });
 
-module.exports = router;
+module.exports = g.router;
