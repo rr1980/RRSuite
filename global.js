@@ -50,7 +50,5 @@ exports.bundler = _bundler;
 var _twitch_api = require("./scripts/twitch/twitch_api");
 exports.twitch_api = _twitch_api;
 
-// _config.twitch.channel_follow = _twitch_api.Auth();
-
 console.log("global...: initialisiert");
 self.rdy = true;
