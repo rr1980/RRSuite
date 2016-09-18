@@ -2,8 +2,8 @@
 var self = this;
 
 exports.collect = function () {
-    var prio = self.reverseArr(g.config.bundler.scripts.priority);
-    var result = self._fromDir(g.config.bundler.scripts.path, g.config.bundler.scripts.filter);
+    var prio = self.reverseArr(g.config.bundler_scripts_priority);
+    var result = self._fromDir(g.config.bundler_scripts_path, g.config.bundler_scripts_filter);
 
     for (var p in prio) {
         for (var r in result) {
@@ -16,7 +16,7 @@ exports.collect = function () {
         }
     }
 
-    var exec = g.config.bundler.scripts.exception;
+    var exec = g.config.bundler_scripts_exception;
 
     for (var e in exec) {
         for (var u in result) {

@@ -3,9 +3,8 @@ var g = require('../global');
 
 
 g.router.get('/', function (req, res, next) {
-    if (g.config.rdy) {
-
-        if (g.config.twitch.access_token !== "") {
+    if (g.rdy) {
+        if (g.twitch_api.isAuth()) {
 
             res.render('_layout', {
                 // content: "index.ejs",
@@ -16,7 +15,6 @@ g.router.get('/', function (req, res, next) {
         } else {
             res.redirect(g.twitch_api.AuthUrl());
         }
-
     }
     else {
         res.send('Server not rdy!');
@@ -25,11 +23,10 @@ g.router.get('/', function (req, res, next) {
 
 g.router.get('/twitch*', function (req, res, next) {
     if (req.query.code !== null) {
-        g.config.twitch.code = req.query.code;
         console.log('twitch...: AUTH');
-        g.twitch_api.GetToken(res, function (res) {
+        g.twitch_api.GetToken(req.query.code, res, function (res) {
             g.twitch_api.GetChannelsFollowAsync(function (data) {
-                g.config.twitch.follows = data;
+                g.twitch_api.follows = data;
                 res.redirect("/");
             });
         });

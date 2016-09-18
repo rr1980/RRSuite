@@ -1,11 +1,12 @@
 exports.io = {};
 exports.socketsbase = {};
 
-
 var fs = require('fs');
 var _config = require("./config.json");
 _config.rdy = false;
 var self = this;
+self.rdy = false;
+exports.rdy = self.rdy;
 
 Object.observe(_config, function (changes) {
     if (changes[0].name !== "rdy") {
@@ -52,4 +53,4 @@ exports.twitch_api = _twitch_api;
 // _config.twitch.channel_follow = _twitch_api.Auth();
 
 console.log("global...: initialisiert");
-_config.rdy = true;
+self.rdy = true;

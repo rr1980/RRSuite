@@ -19,7 +19,7 @@ $(document).ready(function () {
                 var str = "<img src='" + data[f].preview.medium + "' />";
                 $(".rr-content").append(str);
             }
-        })
+        });
     });
 
 });

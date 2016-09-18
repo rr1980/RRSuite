@@ -1,38 +1,27 @@
 {
-    "bundler": {
-        "scripts": {
-            "path": "./public/javascripts",
-            "filter": "js",
-            "exception": [
-                "main.js"
-            ],
-            "priority": [
-                "jquery.js",
-                "socket.io.js",
-                "socket.io.js",
-                "knockout-latest.debug.js",
-                "knockout.mapping.js",
-                "bootstrap.min.js"
-            ]
-        },
-        "css": {
-            "path": "./public/stylesheets",
-            "filter": "css"
-        }
-    },
-    "twitch": {
-        "auth_url": "https://api.twitch.tv/kraken/oauth2/authorize",
-        "token_url": "https://api.twitch.tv/kraken/oauth2/token",
-        "client_id": "15nk2wvpe4xtkwcssw9kslukwimb920",
-        "user_name": "Oxi19800",
-        "redirect_uri": "http://localhost/twitch",
-        "access_token": "",
-        "refresh_token": "",
-        "state": "",
-        "scope": [
-            "user_read",
-            "channel_read"
-        ],
-        "client_secret": "pcq4xqzhhk3ove6rk6w0yutk0b28hjw"
-    }
+    "bundler_scripts_path": "./public/javascripts",
+    "bundler_scripts_filter": "js",
+    "bundler_scripts_exception": [
+        "main.js"
+    ],
+    "bundler_scripts_priority": [
+        "jquery.js",
+        "socket.io.js",
+        "socket.io.js",
+        "knockout-latest.debug.js",
+        "knockout.mapping.js",
+        "bootstrap.min.js"
+    ],
+    "bundler_css_path": "./public/stylesheets",
+    "bundler_css_filter": "css",
+    "twitch_auth_url": "https://api.twitch.tv/kraken/oauth2/authorize",
+    "twitch_token_url": "https://api.twitch.tv/kraken/oauth2/token",
+    "twitch_client_id": "15nk2wvpe4xtkwcssw9kslukwimb920",
+    "twitch_client_secret": "pcq4xqzhhk3ove6rk6w0yutk0b28hjw",
+    "twitch_user_name": "Oxi19800",
+    "twitch_redirect_uri": "http://localhost/twitch",
+    "twitch_scope": [
+        "user_read",
+        "channel_read"
+    ]
 }

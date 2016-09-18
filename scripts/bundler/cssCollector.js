@@ -2,7 +2,7 @@
 var self = this;
 
 exports.collect = function () {
-    var result = self._fromDir(g.config.bundler.css.path, g.config.bundler.css.filter);
+    var result = self._fromDir(g.config.bundler_css_path, g.config.bundler_css_filter);
     return result;
 };
 
