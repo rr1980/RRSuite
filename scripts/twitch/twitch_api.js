@@ -27,14 +27,18 @@ exports.UpdateFollowAsync = function (fail_token) {
         });
 };
 
-exports.isAuth = function () {
+exports.isAuth = function (req, res, next) {
     var url = "https://api.twitch.tv/kraken" +
-        "?client_id=" + g.config.twitch_client_id+
+        "?client_id=" + g.config.twitch_client_id +
         "&oauth_token=" + g.config.twitch_access_token;
     var result = g.request_Sync("GET", url);
     var b = JSON.parse(result.body);
 
-    if (b.identified === true) {
+    if (b.identified === false ) {
+        console.log('twitch...: isAuth = false');
+        res.redirect(self.AuthUrl());
+    }
+    else {
         console.log('twitch...: isAuth = true');
         if (b.token.valid === true) {
             console.log('twitch...: token_valid = true');
@@ -46,14 +50,12 @@ exports.isAuth = function () {
         }
         else{
             console.log('twitch...: token_valid = false');
+            res.redirect(self.AuthUrl());
             return false;
         }
     }
-    else {
-        console.log('twitch...: isAuth = false');
-        return false;
-    }
 };
+
 
 exports.Init = function (code) {
     self.code = code;
