@@ -1,5 +1,6 @@
 ﻿var scriptsCollector = require('./scriptsCollector');
 var cssCollector = require('./cssCollector');
+// var g = require('../../global');
 
 module.exports = {
     loadScripts: function () {

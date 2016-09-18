@@ -1,11 +1,9 @@
-﻿var fs = require('fs');
-var global = require('../../global');
-var config = global.config;
+﻿var g = require('../../global');
 var self = this;
 
 exports.collect = function () {
-    var prio = self.reverseArr(config.bundler.scripts.priority);
-    var result = self._fromDir(config.bundler.scripts.path, config.bundler.scripts.filter);
+    var prio = self.reverseArr(g.config.bundler.scripts.priority);
+    var result = self._fromDir(g.config.bundler.scripts.path, g.config.bundler.scripts.filter);
 
     for (var p in prio) {
         for (var r in result) {
@@ -18,7 +16,7 @@ exports.collect = function () {
         }
     }
 
-    var exec = config.bundler.scripts.exception;
+    var exec = g.config.bundler.scripts.exception;
 
     for (var e in exec) {
         for (var u in result) {
@@ -52,12 +50,12 @@ self._fromDir = function (dir, filter) {
 
 self.__fromDir = function (dir, filter, fileList) {
     fileList = fileList || [];
-    var files = fs.readdirSync(dir);
+    var files = g.fs.readdirSync(dir);
     for (var i in files) {
         if (!files.hasOwnProperty(i))
         { continue; }
         var name = dir + '/' + files[i];
-        if (fs.statSync(name).isDirectory()) {
+        if (g.fs.statSync(name).isDirectory()) {
             self.__fromDir(name, filter, fileList);
         } else if (name.indexOf(filter) >= 0) {
             fileList.push(name);

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <%- loadCss %>
-    <%- loadScripts %>
+        <%- loadScripts %>
 </head>
 
 <body id="app">
@@ -18,6 +18,12 @@
 
 
     <div class="rr-content" data-bind="">
+
+            <% twitch_follows.forEach(function(follow) { %>
+                <li>
+                    <img src="<%- follow.preview.medium %>" /> 
+                </li>
+                <% }); %>
     </div>
 
     <script src="/javascripts/main.js"></script>

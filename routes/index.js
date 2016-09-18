@@ -1,21 +1,42 @@
-var express = require('express');
-var router = express.Router();
+
 var g = require('../global');
 
 
-//var bundler = require('../scripts/bundler/Bundler_loader');
-var bundler = g.bundler;
+g.router.get('/', function (req, res, next) {
+    if (g.config.rdy) {
 
-/* GET home page. */
-router.get('/*', function (req, res, next) {
+        if (g.config.twitch.access_token !== "") {
+            
+            res.render('_layout', {
+                // content: "index.ejs",
+                //model: indexController.model(),
+                twitch_follows: g.twitch_api.GetChannelsFollow(),
+                loadScripts: g.bundler.loadScripts(),
+                loadCss: g.bundler.loadCss()
+            });
+        } else {
+            res.redirect(g.twitch_api.AuthUrl());
+        }
 
-
-    res.render('_layout', {
-        // content: "index.ejs",
-        //model: indexController.model(),
-        loadScripts: bundler.loadScripts(),
-        loadCss: bundler.loadCss()
-    });
+    }
+    else {
+        res.send('Server not rdy!');
+    }
 });
 
-module.exports = router;
+g.router.get('/twitch*', function (req, res, next) {
+    if (req.query.code !== null) {
+        g.config.twitch.code = req.query.code;
+        console.log('twitch...: AUTH');
+        g.twitch_api.GetToken(res, function(res){
+            res.redirect("/");
+        });
+    }
+    else {
+        console.log('NOPE!!! /index.js /twitch no code in query');
+        res.send("NOPE!!! /index.js /twitch no code in query");
+    }
+});
+
+
+module.exports = g.router;
