@@ -1,14 +1,67 @@
 ﻿html {
     margin: 0;
     padding: 0;
-} 
+}
 
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    color: white;
     background-image: url('../images/Space-Backgrounds4.jpg');
 }
 
+#blub {
+    position: fixed;
+    top: 600px;
+    left: 100px;
+}
 
+.rr-nav-transition {
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    -webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+}
+
+.rr-nav {
+    float: left;
+    left: 0;
+    top: 0;
+    height: 0;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(130, 130, 130, 0.5);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.rr-nav-open {
+    height: 200px;
+    z-index: 1000;
+}
+
+.rr-nav-content {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 100%;
+    overflow-x: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+    z-index: 1001;
+}
+
+.rr-nav-content-img {
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    padding: 3% 0 0 3%;
+    display: inline-block;
+}
