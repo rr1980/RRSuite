@@ -4,7 +4,7 @@ var app = g.express();
 // view engine setup
 app.set('views', g.path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
- 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(g.logger('dev'));
@@ -33,7 +33,7 @@ if (app.get('env') === 'development') {
     res.render('_error', {
       message: err.message,
       error: err
-    });
+    }); 
   });
 }
 
