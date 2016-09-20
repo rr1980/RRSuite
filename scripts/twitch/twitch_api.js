@@ -115,7 +115,7 @@ self.get_games_url = function(item) {
         "?client_id=" + g.config.twitch_client_id +
         "&q=" + item.game +
         "&type=suggest";
-}
+};
 
 self.get_follower_url = function() {
     return g.config.twitch_follower_url +
@@ -142,4 +142,4 @@ self.get_auth_url = function() {
 
 self.get_auth_check_url = function() {
     return g.config.twitch_auth_check_url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
-}
+};
