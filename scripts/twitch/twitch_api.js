@@ -10,7 +10,6 @@ exports.state = {
 var it;
 
 
-
 exports.Auth = function(req, res, sucess, fail) {
     if (self.state.auth !== true || self.state.token !== true) {
         res.redirect(self.get_auth_url());
