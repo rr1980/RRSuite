@@ -2,43 +2,33 @@ var g = require('../../global.js');
 var async = require("async");
 var self = this;
 exports.follows = {};
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/twitch
 exports.state = {
     auth: false,
     token: false
 };
-<<<<<<< HEAD
+
 var it;
 self.url = "https://api.twitch.tv/kraken";
-=======
+
 self.code = {};
 var it;
->>>>>>> refs/remotes/origin/twitch
-=======
+
 var it;
 //self.url = "https://api.twitch.tv/kraken";
->>>>>>> refs/remotes/origin/twitch
+
 
 exports.Auth = function(req, res, sucess, fail) {
     if (self.state.auth !== true || self.state.token !== true) {
         res.redirect(self.get_auth_url());
     } else {
-<<<<<<< HEAD
-=======
+
         self.Timer();
->>>>>>> refs/remotes/origin/twitch
+
         sucess();
     }
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/twitch
+
 exports.set_auth = function(req, res, next, sucess, fail) {
     if (req.query.code !== null) {
         self.code = req.query.code;
@@ -51,12 +41,11 @@ exports.set_auth = function(req, res, next, sucess, fail) {
     }
 
 };
-<<<<<<< HEAD
-=======
+
 self.code = {};
 
 
->>>>>>> parent of 2f6e9ea... fuck
+
 
 exports.UpdateFollowAsync = function (fail_token) {
     console.log('twitch...: sync');
@@ -108,7 +97,7 @@ exports.isAuth = function () {
     }
 };
 
-<<<<<<< HEAD
+
 self.get_follower_url = function() {
     return g.config.twitch_follower_url +
         "?client_id=" + g.config.twitch_client_id +
@@ -117,12 +106,12 @@ self.get_follower_url = function() {
 
 self.get_auth_token_url = function() {
     return g.config.twitch_token_url +
-=======
+
 self.UpdateFollowAsync = function(fail_token) {
-=======
+
 
 self.UpdateFollowAsync = function() {
->>>>>>> refs/remotes/origin/twitch
+
     console.log('twitch...: sync');
 
     g.request(self.get_follower_url(), function(error, response, body) {
@@ -200,12 +189,10 @@ self.Init = function() {
     }
 };
 
-<<<<<<< HEAD
 exports.Init = function(code) {
     self.code = code;
-    var url = g.config.twitch_token_url +
->>>>>>> refs/remotes/origin/twitch
-=======
+    var url = g.config.twitch_token_url 
+
 self.get_games_url = function(item) {
     return g.config.twitch_games_url +
         "?client_id=" + g.config.twitch_client_id +
@@ -220,13 +207,11 @@ self.get_follower_url = function() {
 };
 
 self.get_auth_token_url = function() {
-    return g.config.twitch_token_url +
->>>>>>> refs/remotes/origin/twitch
-=======
+    return g.config.twitch_token_url ;
+
 exports.Init = function (code) {
     self.code = code;
     var url = g.config.twitch_token_url +
->>>>>>> parent of 2f6e9ea... fuck
         "?client_id=" + g.config.twitch_client_id +
         "&client_secret=" + g.config.twitch_client_secret +
         "&grant_type=authorization_code" +
@@ -240,42 +225,33 @@ exports.Init = function (code) {
     g.config.twitch_refresh_token = b.refresh_token;
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 self.get_auth_url = function() {
-=======
+
 self.AuthUrl = function() {
->>>>>>> refs/remotes/origin/twitch
-=======
+
+
 self.get_auth_url = function() {
->>>>>>> refs/remotes/origin/twitch
-=======
+
+
 exports.AuthUrl = function () {
->>>>>>> parent of 2f6e9ea... fuck
+
     return g.config.twitch_auth_url +
         "?response_type=code" +
         "&client_id=" + g.config.twitch_client_id +
         "&redirect_uri=" + g.config.twitch_redirect_uri +
         "&scope=" + g.config.twitch_scope[0];
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 };
 
-<<<<<<< HEAD
 self.get_auth_url_check = function() {
     return self.url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
 }
-=======
+
 };
->>>>>>> refs/remotes/origin/twitch
-=======
+
 };
 
 self.get_auth_check_url = function() {
     return g.config.twitch_auth_check_url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
 };
->>>>>>> refs/remotes/origin/twitch
-=======
 
->>>>>>> parent of 2f6e9ea... fuck
