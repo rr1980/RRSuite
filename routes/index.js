@@ -1,13 +1,15 @@
 var g = require('../global');
 
-g.router.get('/', function (req, res, next) {
-    if (g.twitch_api.isAuth(req, res, next)) {
+
+g.router.get('/', function(req, res, next) {
+    g.twitch_api.Auth(req, res, function() {
         res.render('_layout', {
             // content: "index.ejs",
             //model: indexController.model(),
             loadScripts: g.bundler.loadScripts(),
             loadCss: g.bundler.loadCss()
         });
+<<<<<<< HEAD
     }
 
 
@@ -38,6 +40,12 @@ g.router.get('/', function(req, res, next) {
     else {
         res.send('Server not rdy!');
     }
+>>>>>>> refs/remotes/origin/twitch
+=======
+    }, function(msg) {
+        console.log(msg);
+
+    });
 >>>>>>> refs/remotes/origin/twitch
 });
 

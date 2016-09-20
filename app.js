@@ -33,6 +33,9 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> refs/remotes/origin/twitch
     app.use(function(err, req, res) {
         res.status(err.status || 500);
         res.render('_error', {
@@ -40,6 +43,7 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
+<<<<<<< HEAD
 =======
   app.use(function(err, req, res) {
     res.status(err.status || 500);
@@ -48,6 +52,8 @@ if (app.get('env') === 'development') {
       error: err
     }); 
   });
+>>>>>>> refs/remotes/origin/twitch
+=======
 >>>>>>> refs/remotes/origin/twitch
 }
 
