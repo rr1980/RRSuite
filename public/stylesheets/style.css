@@ -54,7 +54,6 @@ body {
 
 .rr-nav-open {
     height: 300px;
-    z-index: 1000;
     font-size: 130%;
 }
 
@@ -62,7 +61,6 @@ body {
     float: left;
     height: 10%;
     width: 100%;
-    z-index: 1001;
     background-color: red;
 }
 
@@ -71,7 +69,6 @@ body {
     height: 90%;
     width: 100%;
     white-space: nowrap;
-    z-index: 1001;
     overflow-x: auto;
     overflow-x: hidden;
 }
@@ -87,7 +84,7 @@ body {
 .rr-nav-content-item-header {
     position: relative;
     top: 0;
-    height: auto;
+    height: 15%;
     width: auto;
     max-width: 100%;
     max-height: 20%;
@@ -96,17 +93,33 @@ body {
 }
 
 .rr-nav-content-item-header-span-left {
-    padding: 1%;
+    position: relative;
+    float: left;
+    padding: 3%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
-.rr-nav-content-item-header-div-center {
-    padding: 1%;
+.rr-nav-content-item-header-gameimg {
+    position: relative;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
     float: right;
+    padding: 2%;
 }
 
 .rr-nav-content-item-header-span-right {
-    padding: 1%;
+    position: relative;
+    padding: 3%;
     float: right;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .rr-nav-content-item-img {

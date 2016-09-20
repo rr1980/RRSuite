@@ -17,7 +17,7 @@ var headerViewmodel = function(data) {
                 self.items.push(data[f]);
             }
             $(".rr-nav").toggleClass('rr-nav-open');
-            console.debug(self.items()[0]);
+            // console.debug(self.items());
         });
 
 

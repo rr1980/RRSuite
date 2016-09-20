@@ -1,8 +1,10 @@
 var g = require('../../global.js');
+var async = require("async");
+
 var self = this;
 exports.follows = {};
 self.code = {};
-
+var it;
 
 
 self.UpdateFollowAsync = function(fail_token) {
@@ -16,6 +18,7 @@ self.UpdateFollowAsync = function(fail_token) {
             if (!error && response.statusCode === 200) {
                 var r = JSON.parse(body);
                 self.follows = r.streams;
+                self.games();
             } else {
                 console.log("ERROR............: " + JSON.stringify(error));
                 console.log(body);
@@ -26,7 +29,34 @@ self.UpdateFollowAsync = function(fail_token) {
         });
 };
 
-var it;
+self.games = function() {
+    async.each(self.follows,
+        function(item, callback) {
+
+            var uri = "https://api.twitch.tv/kraken/search/games" +
+                "?client_id=" + g.config.twitch_client_id +
+                "&q=" + item.game +
+                "&type=suggest";
+
+            g.request(uri,
+                function(error, response, body) {
+                    if (!error && response.statusCode === 200) {
+                        var r = JSON.parse(body);
+                        item.gameData = r.games[0];
+
+                    } else {
+                        console.log("ERROR............: " + JSON.stringify(error));
+                        console.log(body);
+                    }
+                });
+            callback();
+
+        },
+        function(err) {
+            console.log(JSON.stringify(err));
+        }
+    );
+};
 
 self.Timer = function() {
     if (it === undefined) {
@@ -35,7 +65,7 @@ self.Timer = function() {
             self.UpdateFollowAsync();
         }, 60 * 1000);
     }
-}
+};
 
 exports.isAuth = function(req, res, next) {
     var url = "https://api.twitch.tv/kraken" +
