@@ -14,7 +14,8 @@ self.code = {};
 var it;
 
 var it;
-//self.url = "https://api.twitch.tv/kraken";
+
+
 
 
 exports.Auth = function(req, res, sucess, fail) {
