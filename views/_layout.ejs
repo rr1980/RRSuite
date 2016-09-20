@@ -11,14 +11,14 @@
 
 <body id="app">
 
-    <button id="blub">BLUB</button>
-    <div class="rr-header" data-bind="">
 
+    <div class="rr-header" data-bind="with: headerViewmodel">
+        <% include _navbar.ejs %>
     </div>
 
 
     <div class="rr-content" data-bind="">
-
+        <button id="blub">BLUB</button>
     </div>
 
     <script src="/javascripts/main.js"></script>
@@ -28,6 +28,6 @@
 </html>
 
 <script>
-    // var lvm = new layoutViewModel();
-    // ko.applyBindings(lvm, document.getElementById("app"));
+    var aVm = new appViewmodel();
+    ko.applyBindings(aVm, document.getElementById("app"));
 </script>

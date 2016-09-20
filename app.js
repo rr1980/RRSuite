@@ -32,6 +32,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+<<<<<<< HEAD
     app.use(function(err, req, res) {
         res.status(err.status || 500);
         res.render('_error', {
@@ -39,6 +40,15 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
+=======
+  app.use(function(err, req, res) {
+    res.status(err.status || 500);
+    res.render('_error', {
+      message: err.message,
+      error: err
+    }); 
+  });
+>>>>>>> refs/remotes/origin/twitch
 }
 
 // production error handler

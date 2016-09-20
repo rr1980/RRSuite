@@ -1,14 +1,150 @@
 ﻿html {
     margin: 0;
     padding: 0;
-} 
+    font-size: 100%;
+}
 
 body {
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    color: white;
     background-image: url('../images/Space-Backgrounds4.jpg');
+    font-size: 100%;
 }
 
+#blub {
+    position: fixed;
+    top: 600px;
+    left: 100px;
+}
 
+.rr-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 100%;
+}
+
+.rr-nav-transition {
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+    -webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    font-size: 1%;
+}
+
+.rr-nav {
+    left: 0;
+    top: 0;
+    height: 0;
+    width: 100%;
+    background-color: rgba(130, 130, 130, 0.5);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.rr-nav-open {
+    height: 300px;
+    font-size: 130%;
+}
+
+.rr-nav-header {
+    float: left;
+    height: 10%;
+    width: 100%;
+    background-color: red;
+}
+
+.rr-nav-content {
+    float: left;
+    height: 90%;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-x: hidden;
+}
+
+.rr-nav-content-item {
+    white-space: nowrap;
+    display: inline-block;
+    padding: 1%;
+    height: 100%;
+    width: auto;
+}
+
+.rr-nav-content-item-header {
+    position: relative;
+    top: 0;
+    height: 15%;
+    width: auto;
+    max-width: 100%;
+    max-height: 20%;
+    background-color: rgba(30, 30, 30, 0.3);
+    font-size: 70%;
+}
+
+.rr-nav-content-item-header-span-left {
+    position: relative;
+    float: left;
+    padding: 3%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.rr-nav-content-item-header-gameimg {
+    position: relative;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    float: right;
+    padding: 2%;
+}
+
+.rr-nav-content-item-header-span-right {
+    position: relative;
+    padding: 3%;
+    float: right;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.rr-nav-content-item-img {
+    position: relative;
+    top: 20%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 80%;
+}
+
+.rr-nav-trigger {
+    position: relative;
+    padding: 5px;
+    margin: 0 calc(100% /2) auto;
+}
+
+.glyphicon-align-justify {
+    font-size: 22px;
+    color: black;
+    text-decoration: none;
+    transition: color 0.4s ease-in-out;
+}
+
+.glyphicon-align-justify:hover {
+    color: #828282;
+    transition: color 0.4s ease-in-out;
+}
