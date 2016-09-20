@@ -5,9 +5,10 @@
     <div class="rr-nav-content" data-bind="foreach: items,event: { mousewheel: scrolled }">
         <div class="rr-nav-content-item">
             <div class="rr-nav-content-item-header">
-                <label>aaa</label>
+                <span class="rr-nav-content-item-header-span-left" data-bind="text: $data.channel.display_name"></span>
+                <span class="rr-nav-content-item-header-span-right" data-bind="text: $data.viewers">20400</span>
             </div>
-            <img class="rr-nav-content-item-img" " data-bind="attr:{src: $data} "/>
+            <img class="rr-nav-content-item-img" " data-bind="attr:{src: $data.preview.medium} "/>
         </div>
     </div>
 </div>

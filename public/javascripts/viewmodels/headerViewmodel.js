@@ -16,11 +16,14 @@ var headerViewmodel = function(data) {
             type: "GET",
             cahce: false
         }).done(function(data) {
-            $(".rr-nav-content").html("");
+
             for (var f in data) {
-                self.items.push(data[f].preview.medium);
+                // console.debug(data[f].channel.display_name);
+                self.items.push(data[f]);
             }
             $(".rr-nav").toggleClass('rr-nav-open');
+            console.debug(self.items()[0]);
         });
+
     };
 };
