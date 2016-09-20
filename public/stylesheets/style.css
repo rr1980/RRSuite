@@ -66,8 +66,6 @@ body {
     background-color: red;
 }
 
-#jfjf {}
-
 .rr-nav-content {
     float: left;
     height: 90%;
@@ -78,13 +76,31 @@ body {
     overflow-x: hidden;
 }
 
-.rr-nav-content-img {
+.rr-nav-content-item {
+    white-space: nowrap;
+    display: inline-block;
+    padding: 1%;
+    height: 100%;
+    width: auto;
+}
+
+.rr-nav-content-item-header {
+    position: relative;
+    top: 0;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 20%;
+    background-color: green;
+}
+
+.rr-nav-content-item-img {
+    position: relative;
+    top: 20%;
     width: auto;
     height: auto;
-    max-width: 80%;
+    max-width: 100%;
     max-height: 80%;
-    padding: 3% 0 0 3%;
-    display: inline-block;
 }
 
 .rr-nav-trigger {

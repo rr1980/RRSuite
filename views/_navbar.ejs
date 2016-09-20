@@ -2,12 +2,17 @@
     <div id="jfjf" class="rr-nav-header">
         <span id="wwqq">sd</span>
     </div>
-    <div class="rr-nav-content">
-
+    <div class="rr-nav-content" data-bind="foreach: items,event: { mousewheel: scrolled }">
+        <div class="rr-nav-content-item">
+            <div class="rr-nav-content-item-header">
+                <label>aaa</label>
+            </div>
+            <img class="rr-nav-content-item-img" " data-bind="attr:{src: $data} "/>
+        </div>
     </div>
 </div>
-<div class="rr-nav-trigger">
-    <a href="#" class="rr-nav-trigger-a">
-        <span data-bind="click: toggle_Nav" class="glyphicon glyphicon-align-justify"></span>
+<div class="rr-nav-trigger ">
+    <a href="# " class="rr-nav-trigger-a ">
+        <span data-bind="click: toggle_Nav " class="glyphicon glyphicon-align-justify "></span>
     </a>
 </div>
