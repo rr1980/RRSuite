@@ -1,6 +1,18 @@
 
 var g = require('../global');
 
+g.router.get('/', function (req, res, next) {
+    if (g.twitch_api.isAuth(req, res, next)) {
+        res.render('_layout', {
+            // content: "index.ejs",
+            //model: indexController.model(),
+            loadScripts: g.bundler.loadScripts(),
+            loadCss: g.bundler.loadCss()
+        });
+    }
+
+
+});
 
 g.router.get('/', function (req, res, next) {
     if (g.rdy) {
@@ -12,8 +24,6 @@ g.router.get('/', function (req, res, next) {
                 loadScripts: g.bundler.loadScripts(),
                 loadCss: g.bundler.loadCss()
             });
-        } else {
-            res.redirect(g.twitch_api.AuthUrl());
         }
     }
     else {
