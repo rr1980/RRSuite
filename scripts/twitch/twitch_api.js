@@ -8,7 +8,8 @@ exports.state = {
     token: false
 };
 var it;
-//self.url = "https://api.twitch.tv/kraken";
+
+
 
 exports.Auth = function(req, res, sucess, fail) {
     if (self.state.auth !== true || self.state.token !== true) {
