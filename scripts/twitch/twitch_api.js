@@ -1,34 +1,23 @@
 var g = require('../../global.js');
 var async = require("async");
 var self = this;
+self.code = "";
 exports.follows = {};
 exports.state = {
     auth: false,
     token: false
 };
-
 var it;
-self.url = "https://api.twitch.tv/kraken";
-
-self.code = {};
-var it;
-
-var it;
-
-
 
 
 exports.Auth = function(req, res, sucess, fail) {
     if (self.state.auth !== true || self.state.token !== true) {
         res.redirect(self.get_auth_url());
     } else {
-
         self.Timer();
-
         sucess();
     }
 };
-
 
 exports.set_auth = function(req, res, next, sucess, fail) {
     if (req.query.code !== null) {
@@ -43,76 +32,7 @@ exports.set_auth = function(req, res, next, sucess, fail) {
 
 };
 
-self.code = {};
-
-
-
-
-exports.UpdateFollowAsync = function (fail_token) {
-    console.log('twitch...: sync');
-
-    var uri = "https://api.twitch.tv/kraken/streams/followed" +
-        "?client_id=" + g.config.twitch_client_id +
-        "&oauth_token=" + g.config.twitch_access_token;
-    g.request(uri,
-        function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-                var r = JSON.parse(body);
-                self.follows = r.streams;
-            }
-            else {
-                console.log("ERROR............: " + JSON.stringify(error));
-                console.log(body);
-                if (response.statusCode === 401) {
-                    fail_token();
-                }
-            }
-        });
-};
-
-exports.isAuth = function () {
-    var url = "https://api.twitch.tv/kraken" +
-        "?client_id=" + g.config.twitch_client_id+
-        "&oauth_token=" + g.config.twitch_access_token;
-    var result = g.request_Sync("GET", url);
-    var b = JSON.parse(result.body);
-
-    if (b.identified === true) {
-        console.log('twitch...: isAuth = true');
-        if (b.token.valid === true) {
-            console.log('twitch...: token_valid = true');
-            self.UpdateFollowAsync();
-            setInterval(function () {
-                self.UpdateFollowAsync();
-            }, 60 * 1000);
-            return true;
-        }
-        else{
-            console.log('twitch...: token_valid = false');
-            return false;
-        }
-    }
-    else {
-        console.log('twitch...: isAuth = false');
-        return false;
-    }
-};
-
-
-self.get_follower_url = function() {
-    return g.config.twitch_follower_url +
-        "?client_id=" + g.config.twitch_client_id +
-        "&oauth_token=" + g.config.twitch_access_token;
-};
-
-self.get_auth_token_url = function() {
-    return g.config.twitch_token_url +
-
-self.UpdateFollowAsync = function(fail_token) {
-
-
 self.UpdateFollowAsync = function() {
-
     console.log('twitch...: sync');
 
     g.request(self.get_follower_url(), function(error, response, body) {
@@ -190,10 +110,6 @@ self.Init = function() {
     }
 };
 
-exports.Init = function(code) {
-    self.code = code;
-    var url = g.config.twitch_token_url 
-
 self.get_games_url = function(item) {
     return g.config.twitch_games_url +
         "?client_id=" + g.config.twitch_client_id +
@@ -208,51 +124,22 @@ self.get_follower_url = function() {
 };
 
 self.get_auth_token_url = function() {
-    return g.config.twitch_token_url ;
-
-exports.Init = function (code) {
-    self.code = code;
-    var url = g.config.twitch_token_url +
+    return g.config.twitch_token_url +
         "?client_id=" + g.config.twitch_client_id +
         "&client_secret=" + g.config.twitch_client_secret +
         "&grant_type=authorization_code" +
         "&redirect_uri=" + g.config.twitch_redirect_uri +
         "&code=" + self.code;
-
-    var result = g.request_Sync("POST", url);
-    var b = JSON.parse(result.body);
-
-    g.config.twitch_access_token = b.access_token;
-    g.config.twitch_refresh_token = b.refresh_token;
 };
 
 self.get_auth_url = function() {
-
-self.AuthUrl = function() {
-
-
-self.get_auth_url = function() {
-
-
-exports.AuthUrl = function () {
-
     return g.config.twitch_auth_url +
         "?response_type=code" +
         "&client_id=" + g.config.twitch_client_id +
         "&redirect_uri=" + g.config.twitch_redirect_uri +
         "&scope=" + g.config.twitch_scope[0];
-
-};
-
-self.get_auth_url_check = function() {
-    return self.url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
-}
-
-};
-
 };
 
 self.get_auth_check_url = function() {
     return g.config.twitch_auth_check_url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
 };
-
