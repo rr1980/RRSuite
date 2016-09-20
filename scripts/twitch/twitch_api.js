@@ -1,8 +1,8 @@
 var g = require('../../global.js');
 var async = require("async");
 var self = this;
-self.code = "";
 exports.follows = {};
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -52,55 +52,63 @@ exports.set_auth = function(req, res, next, sucess, fail) {
 
 };
 <<<<<<< HEAD
+=======
+self.code = {};
 
-self.UpdateFollowAsync = function() {
+
+>>>>>>> parent of 2f6e9ea... fuck
+
+exports.UpdateFollowAsync = function (fail_token) {
     console.log('twitch...: sync');
-    g.request(self.get_follower_url(), function(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            var r = JSON.parse(body);
-            self.follows = r.streams;
-        } else {
-            console.log("ERROR............: " + JSON.stringify(error));
-            console.log(body);
-            if (response.statusCode === 401) {
-                self.Init();
+
+    var uri = "https://api.twitch.tv/kraken/streams/followed" +
+        "?client_id=" + g.config.twitch_client_id +
+        "&oauth_token=" + g.config.twitch_access_token;
+    g.request(uri,
+        function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                var r = JSON.parse(body);
+                self.follows = r.streams;
             }
-        }
-    });
+            else {
+                console.log("ERROR............: " + JSON.stringify(error));
+                console.log(body);
+                if (response.statusCode === 401) {
+                    fail_token();
+                }
+            }
+        });
 };
 
-self.get_auth = function(sucess, fail) {
-    if (self.state.auth !== true || self.state.token !== true) {
-        var result = g.request_Sync("POST", self.get_auth_token_url());
-        var b = JSON.parse(result.body);
-        if (b.access_token !== undefined && b.refresh_token !== undefined) {
-            self.state.auth = true;
-            self.state.token = true;
-            g.config.twitch_access_token = b.access_token;
-            g.config.twitch_refresh_token = b.refresh_token;
-            sucess();
-        } else {
-            fail("in get_auth");
+exports.isAuth = function () {
+    var url = "https://api.twitch.tv/kraken" +
+        "?client_id=" + g.config.twitch_client_id+
+        "&oauth_token=" + g.config.twitch_access_token;
+    var result = g.request_Sync("GET", url);
+    var b = JSON.parse(result.body);
+
+    if (b.identified === true) {
+        console.log('twitch...: isAuth = true');
+        if (b.token.valid === true) {
+            console.log('twitch...: token_valid = true');
+            self.UpdateFollowAsync();
+            setInterval(function () {
+                self.UpdateFollowAsync();
+            }, 60 * 1000);
+            return true;
         }
+        else{
+            console.log('twitch...: token_valid = false');
+            return false;
+        }
+    }
+    else {
+        console.log('twitch...: isAuth = false');
+        return false;
     }
 };
 
-self.Init = function() {
-    var receive = g.request_Sync("GET", self.get_auth_url_check());
-    var result = JSON.parse(receive.body);
-
-    if (result.identified === true) {
-        self.state.auth = true;
-        if (result.token.valid === true) {
-            self.state.token = true;
-        } else {
-            self.state.token = false;
-        }
-    } else {
-        self.state.auth = false;
-    }
-};
-
+<<<<<<< HEAD
 self.get_follower_url = function() {
     return g.config.twitch_follower_url +
         "?client_id=" + g.config.twitch_client_id +
@@ -214,13 +222,25 @@ self.get_follower_url = function() {
 self.get_auth_token_url = function() {
     return g.config.twitch_token_url +
 >>>>>>> refs/remotes/origin/twitch
+=======
+exports.Init = function (code) {
+    self.code = code;
+    var url = g.config.twitch_token_url +
+>>>>>>> parent of 2f6e9ea... fuck
         "?client_id=" + g.config.twitch_client_id +
         "&client_secret=" + g.config.twitch_client_secret +
         "&grant_type=authorization_code" +
         "&redirect_uri=" + g.config.twitch_redirect_uri +
         "&code=" + self.code;
+
+    var result = g.request_Sync("POST", url);
+    var b = JSON.parse(result.body);
+
+    g.config.twitch_access_token = b.access_token;
+    g.config.twitch_refresh_token = b.refresh_token;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 self.get_auth_url = function() {
@@ -230,6 +250,9 @@ self.AuthUrl = function() {
 =======
 self.get_auth_url = function() {
 >>>>>>> refs/remotes/origin/twitch
+=======
+exports.AuthUrl = function () {
+>>>>>>> parent of 2f6e9ea... fuck
     return g.config.twitch_auth_url +
         "?response_type=code" +
         "&client_id=" + g.config.twitch_client_id +
@@ -239,6 +262,7 @@ self.get_auth_url = function() {
 <<<<<<< HEAD
 };
 
+<<<<<<< HEAD
 self.get_auth_url_check = function() {
     return self.url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
 }
@@ -252,3 +276,6 @@ self.get_auth_check_url = function() {
     return g.config.twitch_auth_check_url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
 };
 >>>>>>> refs/remotes/origin/twitch
+=======
+
+>>>>>>> parent of 2f6e9ea... fuck
