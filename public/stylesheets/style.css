@@ -99,6 +99,11 @@ body {
     padding: 1%;
 }
 
+.rr-nav-content-item-header-div-center {
+    padding: 1%;
+    float: right;
+}
+
 .rr-nav-content-item-header-span-right {
     padding: 1%;
     float: right;
