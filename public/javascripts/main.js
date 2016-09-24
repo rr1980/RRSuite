@@ -1,5 +1,5 @@
 ﻿window.Services = {};
-// var socket = window.io();
+var socket = window.io();
 // socket.on("eval", function(msg) { //socket.emit('rdy');
 //     eval(msg.data);
 // });

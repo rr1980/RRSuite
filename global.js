@@ -1,5 +1,6 @@
 exports.io = {};
-exports.socketsbase = {};
+//exports.socket = {};
+//exports.socketsbase = {};
 
 var fs = require('fs');
 var _config = require("./config.json");
