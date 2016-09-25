@@ -1,47 +1,36 @@
 var g = require('../../global.js');
 var async = require("async");
 var self = this;
-self.code = "";
-exports.follows = {};
+var it;
+var follow_length = 0;
+var games_check_count = 0;
+
+exports.follows = [];
 exports.state = {
     auth: false,
-    token: false
+    token: false,
+    rdy: false
 };
-var it;
 
-
-exports.Auth = function(req, res, sucess, fail) {
-    if (self.state.auth !== true || self.state.token !== true) {
-        res.redirect(self.get_auth_url());
-    } else {
-        self.Timer();
-        sucess();
+Timer = function () {
+    if (it === undefined) {
+        self.UpdateFollowAsync();
+        it = setInterval(function () {
+            self.UpdateFollowAsync();
+        }, 60 * 1000);  //60 * 1000
     }
 };
 
-exports.set_auth = function(req, res, next, sucess, fail) {
-    if (req.query.code !== null) {
-        self.code = req.query.code;
-        self.get_auth(sucess, fail);
-
-    } else {
-        fail("in set_auth");
-        console.log('NOPE!!! /twitch_api.js /twitch no code in query');
-        res.send("NOPE!!! /twitch_api.js /twitch no code in query");
-    }
-
-};
-
-self.UpdateFollowAsync = function() {
-    console.log('twitch...: sync');
-
-    g.request(self.get_follower_url(), function(error, response, body) {
+self.UpdateFollowAsync = function () {
+    g.request(get_follower_url(), function (error, response, body) {
         if (!error && response.statusCode === 200) {
             var r = JSON.parse(body);
-            self.follows = r.streams;
-            self.games();
+            self.follows = [];
+            follow_length = r.streams.length;
+            games_check_count = 0;
+            games(r.streams);
         } else {
-            console.log("ERROR............: " + JSON.stringify(error));
+            console.log("twitch...: UpdateFollowAsync fail" + JSON.stringify(error));
             console.log(body);
             if (response.statusCode === 401) {
                 self.Init();
@@ -50,17 +39,25 @@ self.UpdateFollowAsync = function() {
     });
 };
 
+function games_check(stream) {
+    games_check_count++;
+    self.follows.push(stream);
+    if (games_check_count === follow_length) {
+        self.state.rdy = true;
+        console.log('twitch...: sync rdy');
+    }
+}
 
-self.games = function() {
-    async.each(self.follows,
-        function(item, callback) {
-            g.request(self.get_games_url(item), function(error, response, body) {
+games = function (streams) {
+    async.each(streams,
+        function (item, callback) {
+            g.request(get_games_url(item), function (error, response, body) {
                 if (!error && response.statusCode === 200) {
                     var r = JSON.parse(body);
                     item.gameData = r.games[0];
-
+                    games_check(item);
                 } else {
-                    console.log("ERROR............: " + JSON.stringify(error));
+                    console.log("twitch...: games error" + JSON.stringify(error));
                     console.log(body);
                 }
             });
@@ -69,39 +66,54 @@ self.games = function() {
     );
 };
 
-self.Timer = function() {
-    if (it === undefined) {
-        self.UpdateFollowAsync();
-        it = setInterval(function() {
-            self.UpdateFollowAsync();
-        }, 60 * 1000);
+exports.Auth = function (req, res, sucess, fail) {
+    if (self.state.auth && self.state.token) {
+        Timer();
+        return true;
+    }
+    else {
+        g.router.get('/twitch*', function (req, res, next) {
+            if (req.query.code !== null) {
+                if (get_token(req.query.code)) {
+                    res.redirect("/");
+                } else {
+                    return false;
+                }
+
+            } else {
+                fail("in set_auth");
+                console.log('NOPE!!! /twitch_api.js /twitch no code in query');
+                res.send("NOPE!!! /twitch_api.js /twitch no code in query");
+            }
+        });
+        res.redirect(get_auth_url());
     }
 };
 
-self.get_auth = function(sucess, fail) {
-    if (self.state.auth !== true || self.state.token !== true) {
-        var result = g.request_Sync("POST", self.get_auth_token_url());
-        var b = JSON.parse(result.body);
-        if (b.access_token !== undefined && b.refresh_token !== undefined) {
-            self.state.auth = true;
-            self.state.token = true;
-            g.config.twitch_access_token = b.access_token;
-            g.config.twitch_refresh_token = b.refresh_token;
-            sucess();
-        } else {
-            fail("in get_auth");
-        }
+get_token = function (code) {
+    var receive = g.request_Sync("POST", get_auth_token_url(code));
+    var result = JSON.parse(receive.body);
+    if (result.access_token !== undefined && result.refresh_token !== undefined) {
+        self.state.auth = true;
+        self.state.token = true;
+        g.config.twitch_access_token = result.access_token;
+        g.config.twitch_refresh_token = result.refresh_token;
+        return true;
     }
-};
+    else {
+        return false;
+    }
+}
 
-self.Init = function() {
-    var receive = g.request_Sync("GET", self.get_auth_check_url());
+self.Init = function () {
+    var receive = g.request_Sync("GET", get_auth_check_url());
     var result = JSON.parse(receive.body);
 
     if (result.identified === true) {
         self.state.auth = true;
         if (result.token.valid === true) {
             self.state.token = true;
+            Timer();
         } else {
             self.state.token = false;
         }
@@ -110,29 +122,29 @@ self.Init = function() {
     }
 };
 
-self.get_games_url = function(item) {
+get_games_url = function (item) {
     return g.config.twitch_games_url +
         "?client_id=" + g.config.twitch_client_id +
         "&q=" + item.game +
         "&type=suggest";
 };
 
-self.get_follower_url = function() {
+get_follower_url = function () {
     return g.config.twitch_follower_url +
         "?client_id=" + g.config.twitch_client_id +
         "&oauth_token=" + g.config.twitch_access_token;
 };
 
-self.get_auth_token_url = function() {
+get_auth_token_url = function (code) {
     return g.config.twitch_token_url +
         "?client_id=" + g.config.twitch_client_id +
         "&client_secret=" + g.config.twitch_client_secret +
         "&grant_type=authorization_code" +
         "&redirect_uri=" + g.config.twitch_redirect_uri +
-        "&code=" + self.code;
+        "&code=" + code;
 };
 
-self.get_auth_url = function() {
+get_auth_url = function () {
     return g.config.twitch_auth_url +
         "?response_type=code" +
         "&client_id=" + g.config.twitch_client_id +
@@ -140,6 +152,6 @@ self.get_auth_url = function() {
         "&scope=" + g.config.twitch_scope[0];
 };
 
-self.get_auth_check_url = function() {
+get_auth_check_url = function () {
     return g.config.twitch_auth_check_url + "?client_id=" + g.config.twitch_client_id + "&oauth_token=" + g.config.twitch_access_token;
 };

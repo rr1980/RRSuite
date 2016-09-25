@@ -15,6 +15,9 @@ app.use(g.express.static(g.path.join(__dirname, 'public')));
 
 
 g.twitch_api.Init();
+
+// g.twitch_api.Login(); 
+
 console.log(JSON.stringify(g.twitch_api.state));
 
 app.get('/get', g.get);

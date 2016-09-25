@@ -9,25 +9,26 @@
         <%- loadScripts %>
 </head>
 
-<body id="app">
+<body>
+    <div id="app">
+
+        <div class="rr-header" data-bind="with: headerViewmodel">
+            <% include _navbar.ejs %>
+        </div>
 
 
-    <div class="rr-header" data-bind="with: headerViewmodel">
-        <% include _navbar.ejs %>
+        <div class="rr-content" data-bind="">
+            <button id="blub">BLUB</button>
+        </div>
+
+
+            <script src="/javascripts/main.js"></script>
     </div>
-
-
-    <div class="rr-content" data-bind="">
-        <button id="blub">BLUB</button>
-    </div>
-
-    <script src="/javascripts/main.js"></script>
+    <script>
+         var aVm = new appViewmodel();
+         ko.applyBindings(aVm, document.getElementById("app"));
+    </script>
 
 </body>
 
 </html>
-
-<script>
-    var aVm = new appViewmodel();
-    ko.applyBindings(aVm, document.getElementById("app"));
-</script>
