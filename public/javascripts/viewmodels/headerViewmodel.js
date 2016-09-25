@@ -1,26 +1,26 @@
-var headerViewmodel = function (data) {
+var headerViewmodel = function (parent) {
     var self = this;
-    var _ = new socketServices();
-    self.items = ko.observableArray();
-    ko.mapping.fromJS(data, {}, self);
+    var get_twitch_follows_timer = 3;
+    self.items = ko.observableArray([]);
 
     self.scrolled = function (vm, event) {
         event.currentTarget.scrollLeft -= (event.deltaY * 60);
     };
 
     self.toggle_Nav = function () {
-        if (!$(".rr-nav").hasClass("rr-nav-open")) {
-            socket.emit('nav-click');
-        }
-        else{
-            $(".rr-nav").toggleClass('rr-nav-open');
-        }
+        $(".rr-nav").toggleClass('rr-nav-open');
     };
 
-    socket.on("nav-click-response", function (data) {
-        for (var f in data) {
-            self.items.push(data[f]);
+    socket.on("get-twitch-follows-response", function (result) {
+        if (result.length > 0) {
+            get_twitch_follows_timer = 60;
         }
-        $(".rr-nav").toggleClass('rr-nav-open');
+        self.items(result);
     });
+
+    var emit_get_follows = function () {
+        socket.emit('get-twitch-follows');
+        setTimeout(emit_get_follows, get_twitch_follows_timer * 1000);
+    }
+    setTimeout(emit_get_follows, get_twitch_follows_timer * 1000);
 };
